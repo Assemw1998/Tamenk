@@ -1,0 +1,1 @@
+<p class="text-center text-muted">Tamenk    &copy; {{date('Y')}}</p>
