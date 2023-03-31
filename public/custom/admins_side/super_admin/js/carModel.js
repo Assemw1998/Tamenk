@@ -9,7 +9,7 @@ $(document).ready(function () {
     //delete
     $(document).on("click", ".delete", function (e) {
         e.preventDefault();
-        var model_id = $(this).attr('data-id');
+        var id = $(this).attr('data-id');
         $.confirm({
             title: 'Car make delete',
             content: 'Are you sure that you wnat to delete this care model?',
@@ -25,7 +25,7 @@ $(document).ready(function () {
                             url: '/super-admin/dashboard/car-model-delete',
                             data: {
                                 _token: token,
-                                id: model_id,
+                                id: id,
                             },
                             success: function (data) {
                                 if (data == true) {

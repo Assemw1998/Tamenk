@@ -19,8 +19,6 @@ class CreateCitiesTable extends Migration
             $table->string('name');
             $table->integer('created_by_id')->default(NULL);  
             $table->integer('updated_by_id')->default(NULL);  
-            $table->integer('created_portal')->default(NULL); 
-            $table->integer('updated_portal')->default(NULL); 
             $table->timestamps();
         });
     }

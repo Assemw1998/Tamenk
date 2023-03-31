@@ -1,6 +1,5 @@
 @extends('admins_side.common.layouts.dashboard')
 @section('content')
-<link href={{asset("custom/super_admin/css/brand.css")}} rel="stylesheet" >
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->

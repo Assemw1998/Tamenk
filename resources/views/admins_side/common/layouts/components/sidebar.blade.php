@@ -1,9 +1,8 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <!-- /var/www/html/planeBee/public/custom/admin/images/planeBeeLogo.png -->
     <a href="#" class="brand-link d-flex justify-content-center">
-        <img src={{ asset("") }} alt="JMF Logo" height="100" width="100">
+        <img src={{ asset("") }} alt="Tamenk Logo" height="100" width="100">
     </a>
 
     <!-- Sidebar -->
@@ -30,10 +29,36 @@
                 @endif
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
-                        <i class="nav-icon fa fa-motorcycle"></i>
+                    <a href="
+                    @if(auth()->user() instanceof \app\models\SuperAdmin)
+                        {{route("super-admin.dashboard.customer-index")}}
+                    @else
+                        {{route("admin.dashboard.customer-index")}}
+                    @endif
+                    " class="nav-link">
+                        <i class="nav-icon fa fa-users"></i>
                         <p>
-                            Motorcycles 
+                            Customers 
+                        </p>
+                    </a>
+                </li>
+                
+                @if(auth()->user() instanceof \app\models\SuperAdmin)
+                <li class="nav-item">
+                    <a href="{{ route('super-admin.dashboard.insurance-company-index')}}" class="nav-link">
+                        <i class="nav-icon fa fa-building"></i>
+                        <p>
+                            Insurance Companies 
+                        </p>
+                    </a>
+                </li>
+                @endif  
+
+                <li class="nav-item">
+                    <a href="" class="nav-link">
+                        <i class="nav-icon fa fa-star"></i>
+                        <p>
+                            Quotations
                         </p>
                     </a>
                 </li>
@@ -43,7 +68,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fa fa-cog"></i>
                         <p>
-                            Settings
+                            Site Settings
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -61,17 +86,17 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href=""  class="nav-link">
+                            <a href="{{ route('super-admin.dashboard.color-index')}}"  class="nav-link">
                                 <i class="far fa fa-ellipsis-h"></i>
                                 <p>Colors</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href=""  class="nav-link">
+                            <a href="{{ route('super-admin.dashboard.country-index')}}"  class="nav-link">
                                 <i class="far fa fa-ellipsis-h"></i>
                                 <p>Countries</p>
                             </a>
-                            <a href=""  class="nav-link">
+                            <a href="{{ route('super-admin.dashboard.city-index')}}"  class="nav-link">
                                 <i class="far fa fa-ellipsis-h"></i>
                                 <p>Cities</p>
                             </a>

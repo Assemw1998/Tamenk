@@ -31,7 +31,7 @@ $(document).ready(function () {
     $(document).on("click", ".delete", function (e) {
 
         e.preventDefault();
-        var model_id = $(this).attr('data-id');
+        var id = $(this).attr('data-id');
         $.confirm({
             title: 'Admin delete',
             content: 'Are you sure that you wnat to delete this admin?',
@@ -47,7 +47,7 @@ $(document).ready(function () {
                             url: '/super-admin/dashboard/admin-delete',
                             data: {
                                 _token: token,
-                                id: model_id,
+                                id: id,
                             },
                             success: function (data) {
                                 if (data == true) {

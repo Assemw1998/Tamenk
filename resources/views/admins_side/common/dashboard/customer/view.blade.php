@@ -1,5 +1,7 @@
-@extends('super_admin.layouts.dashboard')
+@extends('admins_side.common.layouts.dashboard')
 @section('content')
+
+
 <!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -10,53 +12,40 @@
                     <h1 class="m-0 text-capitalize">{{ Request::segment(3) }} #{{$customer->id}}</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6 text-right">
-                    <a href="{{ route('super-admin.dashboard.customer-index')}}">Customer</a>
+                    <a href="
+                   @if(auth()->user() instanceof \app\models\SuperAdmin)
+                        {{route("super-admin.dashboard.customer-index")}}
+                    @else
+                        {{route("admin.dashboard.customer-index")}}
+                    @endif
+                   ">Customers</a>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-    <section class="mt-3 content text-dark center pb-5">
-        <div class="col-6 p-0 mb-2">
-            <a class="btn btn-outline-success  update" href="{{ route('super-admin.dashboard.customer-update-view',['id' => $customer->id])}}" data-id="">Update</a>
-            <a class="btn btn-outline-danger delete" data-id="{{$customer->id}}">Delete</a>
-            <a class="btn btn-outline-info" href="{{ route('super-admin.dashboard.customer-activate-deactivate',['id' => $customer->id,'status'=>$customer->status])}}">{{($customer->status?'Deactivate':'Activate')}}</a>
+    <section class="mt-3 content text-dark center">
+        <div class="col-12 col-lg-6 p-0 mb-2">
+            <a class="btn btn-outline-success  col-lg-3 col-12 update mb-2" href="
+            @if(auth()->user() instanceof \app\models\SuperAdmin)
+                {{route("super-admin.dashboard.customer-update-view",['id' => $customer->id])}}
+            @else
+                {{route("admin.dashboard.customer-update-view",['id' => $customer->id])}}
+            @endif
+            " data-id="">Update</a>
+            <a class="btn btn-outline-danger col-lg-3 col-12 delete mb-2" data-id="{{$customer->id}}" data-url="
+            @if(auth()->user() instanceof \app\models\SuperAdmin)
+                {{"/super-admin/dashboard/customer-delete"}}
+            @else
+                {{"/admin/dashboard/customer-delete"}}
+            @endif
+            ">Delete</a>
         </div>
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
                 <div class="form-group">
-                    <label>First Name</label>
-                    <div>{{$customer->first_name}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Second Name</label>
-                    <div>{{$customer->second_name}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Third Name</label>
-                    <div>{{$customer->third_name}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Last Name</label>
-                    <div>{{$customer->last_name}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Nationality ID</label>
-                    <div>{{$customer->nationality_id}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Mother Name</label>
-                    <div>{{$customer->mother_name}}</div>
+                    <label>Full Name</label>
+                    <div>{{$customer->full_name}}</div>
                 </div>
             </li>
             <li class="list-group-item">
@@ -73,24 +62,9 @@
             </li>
             <li class="list-group-item">
                 <div class="form-group">
-                    <label>Username</label>
-                    <div>{{$customer->username}}</div>
+                    <label>Country</label>
+                    <div>{{$customer->country->name}}</div>
                 </div>
-            </li>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Address 1</label>
-                    <div>{{$customer->address_1}}</div>
-                </div>
-            </li>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Address 2</label>
-                    <div>{{$customer->address_1}}</div>
-                </div>
-            </li>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
@@ -98,82 +72,66 @@
                     <div>{{$customer->city->name}}</div>
                 </div>
             </li>
-            </li>
+            <hr>
             <li class="list-group-item">
                 <div class="form-group">
-                    <label>Birth City</label>
-                    <div>{{$customer->birthCity->name}}</div>
+                    <label>Car Make</label>
+                    <div>{{$customer->make->name}}</div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
-                    <label>Date Of Birth</label>
-                    <div>{{$customer->date_of_birth}}</div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>ID Number</label>
-                    <div>{{$customer->id_number}}</div>
+                    <label>Car Model</label>
+                    <div>{{$customer->model->name}}</div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
-                    <label>ID Expiry Date</label>
-                    <div>{{$customer->id_expiry_date}}</div>
+                    <label>Car Year</label>
+                    <div>{{$customer->year}}</div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
-                    <label class=" d-block">ID Image</label>
-                    @foreach($customer->IdImage as $image)
-                    <img width='200' height='150' class='rounded p-2' src="{{ asset($image->url) }}">
-                    @endforeach
+                    <label>Car Color</label>
+                    <div>{{$customer->color->name}}</div>
+                </div>
+            </li>
+            <hr>
+            <li class="list-group-item">
+                <div class="form-group">
+                    <label>Created Portal</label>
+                    <div>{{$customer->created_portal_name}}</div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
-                    <label>License Number</label>
-                    <div>{{$customer->license_number}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>License Number</label>
-                    <div>{{$customer->license_issue_date}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>License Issue Date</label>
-                    <div>{{$customer->license_expiry_date}}</div>
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label class=" d-block">License Image</label>
-                    @if(isset($customer->LicenseImage->url))
-                        <img width='200' height='150' class='rounded p-2' src="{{ asset($customer->LicenseImage->url) }}">
-                    @endif
-                </div>
-            </li>
-            <li class="list-group-item">
-                <div class="form-group">
-                    <label>Status</label>
-                    <div>{{($customer->status?"Active":"Inactive")}}</div>
+                    <label>Updated Portal</label>
+                    <div>{{$customer->updated_portal_name}}</div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
                     <label>Created By</label>
-                    <div>{{$customer->superAdminCreatedBy->full_name}}</div>
+                    <div>
+                        @if($customer->created_portal==1)
+                        {{$customer->superAdminCreatedBy->full_name}} #{{$customer->created_by_id}}
+                        @else
+                        {{$customer->adminCreatedBy->full_name}} #{{$customer->created_by_id}}
+                        @endif
+                    </div>
                 </div>
             </li>
             <li class="list-group-item">
                 <div class="form-group">
                     <label>Updated By</label>
-                    <div>{{$customer->superAdminUpdatedBy->full_name}}</div>
+                    <div>
+                        @if($customer->updated_portal==1)
+                        {{$customer->superAdminUpdatedBy->full_name}} #{{$customer->updated_by_id}}
+                        @else
+                        {{$customer->adminUpdatedBy->full_name}} #{{$customer->updated_by_id}}
+                        @endif
+                    </div>
                 </div>
             </li>
             <li class="list-group-item">
@@ -191,5 +149,5 @@
         </ul>
     </section>
 </div>
-<script type="text/javascript" src={{asset("custom/super_admin/js/customer.js")}}></script>
+<script type="text/javascript" src={{asset("custom/admins_side/common/js/customer.js")}}></script>
 @endsection

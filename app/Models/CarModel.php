@@ -28,28 +28,28 @@ class CarModel extends ModelLaravel
     {
         parent::boot();
 
-        self::creating(function ($carmodel) {
-            $carmodel->created_by_id = auth()->user()->id;
-            $carmodel->updated_by_id = auth()->user()->id;
+        self::creating(function ($carModel) {
+            $carModel->created_by_id = auth()->user()->id;
+            $carModel->updated_by_id = auth()->user()->id;
         });
 
-        self::created(function ($carmodel) {
+        self::created(function ($carModel) {
             // ... code here
         });
 
-        self::updating(function ($carmodel) {
-            $carmodel->updated_by_id = auth()->user()->id;
+        self::updating(function ($carModel) {
+            $carModel->updated_by_id = auth()->user()->id;
         });
 
-        self::updated(function ($carmodel) {
+        self::updated(function ($carModel) {
             // ... code here
         });
 
-        self::deleting(function ($carmodel) {
+        self::deleting(function ($carModel) {
             // ... code here
         });
 
-        self::deleted(function ($carmodel) {
+        self::deleted(function ($carModel) {
             // ... code here
         });
     }
