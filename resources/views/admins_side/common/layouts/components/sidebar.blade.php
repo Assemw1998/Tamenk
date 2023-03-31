@@ -1,8 +1,8 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link d-flex justify-content-center">
-        <img src={{ asset("") }} alt="Tamenk Logo" height="100" width="100">
+    <a href="#" class="brand-link d-flex justify-content-center" target="_blank">
+        <img src={{ asset("images/resource/logo/image.png") }} alt="Tamenk Logo" height="100" width="100">
     </a>
 
     <!-- Sidebar -->
