@@ -39,6 +39,13 @@
             @else
                 {{"/admin/dashboard/customer-delete"}}
             @endif
+
+            data-url-index="
+            @if(auth()->user() instanceof \app\models\SuperAdmin)
+                {{"/super-admin/dashboard/customer-index"}}
+            @else
+                {{"/admin/dashboard/customer-index"}}
+            @endif
             ">Delete</a>
         </div>
         <ul class="list-group list-group-flush">

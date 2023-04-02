@@ -11,6 +11,7 @@ $(document).ready(function () {
         e.preventDefault();
         var id = $(this).attr('data-id');
         var url = $(this).attr('data-url');
+        var url_index = $(this).attr('data-url-index');
         $.confirm({
             title: 'Customer delete',
             content: 'Are you sure that you wnat to delete this customer?',
@@ -40,7 +41,7 @@ $(document).ready(function () {
                                                 text: 'Okay',
                                                 btnClass: 'btn-green',
                                                 action: function () {
-                                                    window.location.replace('/super-admin/dashboard/customer-index');
+                                                    window.location.replace(url_index);
                                                 }
                                             },
                                         }

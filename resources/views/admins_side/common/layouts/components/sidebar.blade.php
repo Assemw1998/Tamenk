@@ -55,7 +55,13 @@
                 @endif  
 
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="
+                    @if(auth()->user() instanceof \app\models\SuperAdmin)
+                        {{route("super-admin.dashboard.quotation-index")}}
+                    @else
+                        {{route("admin.dashboard.quotation-index")}}
+                    @endif
+                    " class="nav-link">
                         <i class="nav-icon fa fa-star"></i>
                         <p>
                             Quotations

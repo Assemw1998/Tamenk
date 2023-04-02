@@ -111,6 +111,15 @@ Route::group(['namespace' => 'App\Http\Controllers\admins_side\common', 'as' => 
         Route::post('customer-update/{id}', 'dashboard\CustomerController@update')->name('customer-update');
         Route::get('get-car-models/{id}', 'dashboard\CustomerController@getCarModels')->name('get-car-models');
         Route::get('get-cities/{id}', 'dashboard\CustomerController@getCities')->name('get-cities');
+
+         #Quotations#
+         Route::get('quotation-index', 'dashboard\QuotationController@index')->name('quotation-index');
+         Route::get('quotation-create-view', 'dashboard\QuotationController@createview')->name('quotation-create-view');
+         Route::post('quotation-create', 'dashboard\QuotationController@create')->name('quotation-create');
+         Route::get('quotation-view/{id}', 'dashboard\QuotationController@view')->name('quotation-view');
+         Route::post('quotation-delete', 'dashboard\QuotationController@delete')->name('quotation-delete');
+         Route::get('quotation-update-view/{id}', 'dashboard\QuotationController@updateView')->name('quotation-update-view');
+         Route::post('quotation-update/{id}', 'dashboard\QuotationController@update')->name('quotation-update');
     });
 });
 
@@ -129,6 +138,15 @@ Route::group(['namespace' => 'App\Http\Controllers\admins_side\common', 'as' => 
         Route::post('customer-update/{id}', 'dashboard\CustomerController@update')->name('customer-update');
         Route::get('get-car-models/{id}', 'dashboard\CustomerController@getCarModels')->name('get-car-models');
         Route::get('get-cities/{id}', 'dashboard\CustomerController@getCities')->name('get-cities');
+
+         #Quotations#
+         Route::get('quotation-index', 'dashboard\QuotationController@index')->name('quotation-index');
+         Route::get('quotation-create-view', 'dashboard\QuotationController@createview')->name('quotation-create-view');
+         Route::post('quotation-create', 'dashboard\QuotationController@create')->name('quotation-create');
+         Route::get('quotation-view/{id}', 'dashboard\QuotationController@view')->name('quotation-view');
+         Route::post('quotation-delete', 'dashboard\QuotationController@delete')->name('quotation-delete');
+         Route::get('quotation-update-view/{id}', 'dashboard\QuotationController@updateView')->name('quotation-update-view');
+         Route::post('quotation-update/{id}', 'dashboard\QuotationController@update')->name('quotation-update');
     });
 });
 #*****************************************#

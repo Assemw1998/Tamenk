@@ -129,7 +129,7 @@
             <div class="form-group">
                 <label for="color_id">Car Color</label>
                 <select class="form-control" name="color_id" id="color_id" required>
-                    <option value="">Select Color</option>
+                    <option value="">Select Car Color</option>
                     @foreach($colors as $color)
                         @if(old("color_id"))
                             <option value="{{$color->id}}" {{ (old("color_id") == $color->id ? "selected":"") }}>{{$color->name}}</option>

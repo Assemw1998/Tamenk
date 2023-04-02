@@ -18,7 +18,7 @@ class CreateQuotationsTable extends Migration
             $table->integer('customer_id');
             $table->integer('insurance_company_id');
             $table->integer('insurance_type');
-            $table->float('car_value');
+            $table->string('car_value');
             $table->integer('personal_accident_benefits_for_driver');
             $table->integer('personal_accident_benefits_for_passenger');
             $table->integer('road_side_assistance_services');
