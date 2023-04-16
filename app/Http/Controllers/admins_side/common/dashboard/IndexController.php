@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use App\Models\Customer;
 use App\Models\InsuranceCompany;
+use App\Models\Quotation;
 
 class IndexController extends Controller
 {
@@ -16,6 +17,7 @@ class IndexController extends Controller
         $adminsCount = Admin::count();
         $customerCount= Customer::count();
         $insuranceCompaniesCount = InsuranceCompany::count();
-        return view('admins_side.common.dashboard.index', ['isSuperAdmin' => $isSuperAdmin, "adminsCount" => $adminsCount,'customerCount'=>$customerCount,'insuranceCompaniesCount'=>$insuranceCompaniesCount]);
+        $quotationCount = Quotation::count();
+        return view('admins_side.common.dashboard.index', ['isSuperAdmin' => $isSuperAdmin, "adminsCount" => $adminsCount,'customerCount'=>$customerCount,'insuranceCompaniesCount'=>$insuranceCompaniesCount,"quotationCount"=>$quotationCount]);
     }
 }

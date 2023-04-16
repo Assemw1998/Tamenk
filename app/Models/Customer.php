@@ -52,6 +52,11 @@ class Customer extends Model
         return $this->belongsTo(City::class, 'city_id');
     }
 
+    public function quotations()
+    {
+        return $this->hasMany(Quotation::class, 'customer_id');
+    }
+
     public static function boot()
     {
         parent::boot();

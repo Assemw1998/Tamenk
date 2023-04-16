@@ -38,6 +38,7 @@
                         <th>Car Year</th>
                         <th>Car Color</th>
                         <th>View</th>
+                        <th>Quotations</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,6 +63,15 @@
                                 @endif
                                 " class="btn btn-outline-info  view d-block m-2" data-id=""><i class="fa fa-eye"></i></a>    
                             </td>
+                            <td>
+                                <a href="
+                                @if(auth()->user() instanceof \app\models\SuperAdmin)
+                                    {{route("super-admin.dashboard.customer-quotations",['id' => $customer->id])}}
+                                @else
+                                    {{route("admin.dashboard.customer-quotations",['id' => $customer->id])}}
+                                @endif
+                                " class="btn btn-outline-warning  view d-block m-2" data-id=""><i class="fa fa-star"></i></a>    
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -79,6 +89,7 @@
                         <th>Car Year</th>
                         <th>Car Color</th>
                         <th>View</th>
+                        <th>Quotations</th>
                     </tr>
                 </tfoot>
             </table>

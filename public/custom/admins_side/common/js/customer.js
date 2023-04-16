@@ -139,7 +139,7 @@ $(document).ready(function () {
             country_id = 0;
         $.ajax({
             type: 'GET',
-            url: url+ country_id,
+            url: url + country_id,
             data: {
                 _token: token,
             },
@@ -183,6 +183,63 @@ $(document).ready(function () {
                 }
             });
         });
+    });
+
+
+    //delete
+    $(document).on("click", ".send-email", function (e) {
+        e.preventDefault();
+        var id = $(this).attr('data-id');
+        var url = $(this).attr('data-url');
+        $(this).prop( "disabled", true );
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                _token: token,
+                id: id,
+            },
+            success: function (data) {
+                if (data == true) {
+                    $.confirm({
+                        title: 'successfully',
+                        content: 'Email has been send to the customer successfully',
+                        type: 'green',
+                        typeAnimated: true,
+                        buttons: {
+                            tryAgain: {
+                                text: 'Okay',
+                                btnClass: 'btn-green',
+                                action: function () {
+                                    location.reload();
+                                }
+                            },
+                        }
+                    });
+                }
+
+            },
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+            $.confirm({
+                title: 'Technical Error',
+                content: 'Somthing went wrong please try again later.',
+                type: 'red',
+                typeAnimated: true,
+                buttons: {
+                    tryAgain: {
+                        text: 'Okay',
+                        btnClass: 'btn-red',
+                        action: function () {
+                            location.reload();
+                        }
+                    },
+                }
+            });
+        });
+                    
+              
+            
+    
     });
 
 });

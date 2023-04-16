@@ -111,6 +111,9 @@ Route::group(['namespace' => 'App\Http\Controllers\admins_side\common', 'as' => 
         Route::post('customer-update/{id}', 'dashboard\CustomerController@update')->name('customer-update');
         Route::get('get-car-models/{id}', 'dashboard\CustomerController@getCarModels')->name('get-car-models');
         Route::get('get-cities/{id}', 'dashboard\CustomerController@getCities')->name('get-cities');
+        Route::get('customer-quotations/{id}', 'dashboard\CustomerController@quotations')->name('customer-quotations');
+        Route::get('customer-quotation-create-pdf/{id}', 'dashboard\CustomerController@quotationsCreatePdf')->name('customer-quotation-create-pdf');
+        Route::post('customer-quotation-send-email', 'dashboard\CustomerController@quotationsSendEmail')->name('customer-quotation-send-email');
 
          #Quotations#
          Route::get('quotation-index', 'dashboard\QuotationController@index')->name('quotation-index');
@@ -138,6 +141,9 @@ Route::group(['namespace' => 'App\Http\Controllers\admins_side\common', 'as' => 
         Route::post('customer-update/{id}', 'dashboard\CustomerController@update')->name('customer-update');
         Route::get('get-car-models/{id}', 'dashboard\CustomerController@getCarModels')->name('get-car-models');
         Route::get('get-cities/{id}', 'dashboard\CustomerController@getCities')->name('get-cities');
+        Route::get('customer-quotations/{id}', 'dashboard\CustomerController@quotations')->name('customer-quotations');
+        Route::get('customer-quotation-create-pdf/{id}', 'dashboard\CustomerController@quotationsCreatePdf')->name('customer-quotation-create-pdf');
+        Route::post('customer-quotation-send-email', 'dashboard\CustomerController@quotationsSendEmail')->name('customer-quotation-send-email');
 
          #Quotations#
          Route::get('quotation-index', 'dashboard\QuotationController@index')->name('quotation-index');

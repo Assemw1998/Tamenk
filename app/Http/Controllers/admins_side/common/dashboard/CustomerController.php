@@ -10,7 +10,8 @@ use App\Models\Color;
 use App\Models\Country;
 use App\Models\CarModel;
 use App\Models\City;
-
+use Dompdf\Dompdf; 
+use Illuminate\Support\Facades\Mail;
 class CustomerController extends Controller
 {
     public function index()
@@ -65,7 +66,7 @@ class CustomerController extends Controller
 
 
         if ($customer->save()) {
-           return redirect()->route('super-admin.dashboard.customer-view', ['id' => $customer->id]);
+            return redirect()->route('super-admin.dashboard.customer-view', ['id' => $customer->id]);
         }
     }
 
@@ -78,11 +79,11 @@ class CustomerController extends Controller
     {
         $customer = Customer::find($id);
         $carMakes = CarMake::all();
-        $carModels=CarModel::where('make_id', $customer->car_make_id)->orderBy('id', 'ASC')->get();
+        $carModels = CarModel::where('make_id', $customer->car_make_id)->orderBy('id', 'ASC')->get();
         $colors = Color::all();
         $countries = Country::all();
-        $cities =City::where('country_id', $customer->country_id)->orderBy('id', 'ASC')->get();
-        return view('admins_side.common.dashboard.customer.update', ['customer' => $customer,'carMakes'=>$carMakes,'carModels'=>$carModels,'colors'=>$colors,'countries'=>$countries,'cities'=>$cities]);
+        $cities = City::where('country_id', $customer->country_id)->orderBy('id', 'ASC')->get();
+        return view('admins_side.common.dashboard.customer.update', ['customer' => $customer, 'carMakes' => $carMakes, 'carModels' => $carModels, 'colors' => $colors, 'countries' => $countries, 'cities' => $cities]);
     }
 
 
@@ -92,8 +93,8 @@ class CustomerController extends Controller
 
         $this->validate($request, [
             'full_name' => 'required|string|max:255',
-            'phone_number' => 'required|string|between:1,10|unique:customers,phone_number,'.$id,
-            'email' => 'required|email|unique:customers,email,'.$id,
+            'phone_number' => 'required|string|between:1,10|unique:customers,phone_number,' . $id,
+            'email' => 'required|email|unique:customers,email,' . $id,
             'year' => 'required|integer',
         ]);
 
@@ -110,7 +111,7 @@ class CustomerController extends Controller
 
 
         if ($customer->save()) {
-           return redirect()->route('super-admin.dashboard.customer-view', ['id' => $customer->id]);
+            return redirect()->route('super-admin.dashboard.customer-view', ['id' => $customer->id]);
         }
     }
 
@@ -119,5 +120,41 @@ class CustomerController extends Controller
 
         Customer::where('id', $request->id)->delete();
         return true;
+    }
+
+    public function quotations($id)
+    {
+        $customer = Customer::find($id);
+        $quotations = $customer->quotations;
+        return view('admins_side.common.dashboard.customer.quotations', ['customer' => $customer, 'quotations' => $quotations]);
+    }
+
+    public function quotationsCreatePdf($id)
+    {
+        $customer = Customer::find($id);
+        $quotations = $customer->quotations;
+        $dompdf = new Dompdf(); 
+         
+        $html = view('admins_side.common.dashboard.customer.templates.quotations_pdf', ['customer' => $customer,'quotations' => $quotations])->render();
+        $dompdf->loadHtml($html);  
+          
+        $dompdf->setPaper('A4', 'landscape');  
+          
+        $dompdf->render(); 
+         
+        $dompdf->stream("customer_quotations_id_$customer->id.pdf", array("Attachment"=>1));
+    }
+
+    public function quotationsSendEmail(Request $request)
+    {
+        $customer = Customer::find($request->id);
+        $quotations = $customer->quotations;
+        $data = array('customer'=>$customer,'quotations'=>$quotations);
+        Mail::send('admins_side.common.dashboard.customer.templates.quotations_email', $data, function($message)  use ($customer){
+            $message->to($customer->email,$customer->full_name)->subject('Quotations');
+            $message->from('assemwhussein@gmail.com','Tamenek');
+        });  
+        
+        return true;       
     }
 }

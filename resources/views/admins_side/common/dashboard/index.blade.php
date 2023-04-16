@@ -62,14 +62,19 @@
                     <!-- small box -->
                     <div class="small-box bg-warning">
                         <div class="inner">
-                            <h3>44</h3>
+                            <h3>{{$quotationCount}}</h3>
 
                             <p>Quotations</p>
                         </div>
                         <div class="icon">
                             <i class="fa fa-star"></i>
                         </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="
+                        @if(auth()->user() instanceof \app\models\SuperAdmin)
+                            {{route("super-admin.dashboard.quotation-index")}}
+                        @else
+                            {{route("admin.dashboard.quotation-index")}}
+                        @endif" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
