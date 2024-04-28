@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 
 
-
+##ADMIN SIDE##
 #*****************************************#
 #SUPER ADMIN#
 Route::group(['namespace' => 'App\Http\Controllers\admins_side\super_admin', 'as' => 'super-admin.', 'prefix' => 'super-admin'], function () {
     #AUTH#
+    
     Route::get('side', 'auth\LoginController@index')->name('side');
     Route::post('login', 'auth\LoginController@login')->name('login');
     Route::get('logout', 'auth\LogoutController@logout')->name('logout');
@@ -77,6 +78,16 @@ Route::group(['namespace' => 'App\Http\Controllers\admins_side\super_admin', 'as
         Route::get('insurance-company-update-view/{id}', 'dashboard\InsuranceCompanyController@updateView')->name('insurance-company-update-view');
         Route::post('insurance-company-update/{id}', 'dashboard\InsuranceCompanyController@update')->name('insurance-company-update');
         Route::post('insurance-company-delete-image', 'dashboard\InsuranceCompanyController@deleteImage')->name('insurance-company-delete-image');
+
+        #Background image#
+        Route::get('background-image-index', 'dashboard\BackgroundImagesController@index')->name('background-image-index');
+        Route::get('background-image-create-view', 'dashboard\BackgroundImagesController@createview')->name('background-image-create-view');
+        Route::post('background-image-create', 'dashboard\BackgroundImagesController@create')->name('background-image-create');
+        Route::get('background-image-view/{id}', 'dashboard\BackgroundImagesController@view')->name('background-image-view');
+        Route::post('background-image-delete', 'dashboard\BackgroundImagesController@delete')->name('background-image-delete');
+        Route::get('background-image-update-view/{id}', 'dashboard\BackgroundImagesController@updateView')->name('background-image-update-view');
+        Route::post('background-image-update/{id}', 'dashboard\BackgroundImagesController@update')->name('background-image-update');
+        Route::post('background-image-delete-image', 'dashboard\BackgroundImagesController@deleteImage')->name('background-image-delete-image');
     });
 });
 
@@ -155,4 +166,15 @@ Route::group(['namespace' => 'App\Http\Controllers\admins_side\common', 'as' => 
          Route::post('quotation-update/{id}', 'dashboard\QuotationController@update')->name('quotation-update');
     });
 });
+#*****************************************#
+#*****************************************#
+
+
+##CLIENT SIDE##
+
+
+Route::group(['namespace' => 'App\Http\Controllers\client_side'], function () {
+    Route::get('/', 'HomeController@index')->name('/');
+});
+
 #*****************************************#

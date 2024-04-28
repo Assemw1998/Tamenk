@@ -107,6 +107,12 @@
                                 <p>Cities</p>
                             </a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{ route('super-admin.dashboard.background-image-index')}}"  class="nav-link">
+                                <i class="far fa fa-ellipsis-h"></i>
+                                <p>Background Images</p>
+                            </a>
+                        </li>                        
                     </ul>
                 </li>
                 @endif
